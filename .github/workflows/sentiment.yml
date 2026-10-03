@@ -1,0 +1,46 @@
+name: sentiment
+
+on:
+  schedule:
+    - cron: "*/20 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sentiment
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Collect sentiment
+        env:
+          MFX_EMAIL: ${{ secrets.MFX_EMAIL }}
+          MFX_PASSWORD: ${{ secrets.MFX_PASSWORD }}
+        run: python sentiment.py
+
+      - name: Commit if changed
+        run: |
+          git config user.name "mh-sentiment-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add sentiment.json
+          if git diff --cached --quiet; then
+            echo "nothing to commit"
+          else
+            git commit -m "sentiment update"
+            git pull --rebase
+            git push
+          fi
