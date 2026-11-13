@@ -1,11 +1,11 @@
 {
-  "fsd_long": 69.0,
-  "fsd_short": 31.0,
-  "fsd_ts": 1794554552,
-  "mfx_long": 68.0,
-  "mfx_short": 32.0,
-  "mfx_ts": 1794554552,
+  "fsd_long": 70.0,
+  "fsd_short": 30.0,
+  "fsd_ts": 1794584022,
+  "mfx_long": 70.0,
+  "mfx_short": 30.0,
+  "mfx_ts": 1794584022,
   "symbol": "XAUUSD",
-  "updated": "2026-11-13T07:22:32Z",
-  "updated_ts": 1794554552
+  "updated": "2026-11-13T15:33:42Z",
+  "updated_ts": 1794584022
 }
